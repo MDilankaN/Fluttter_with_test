@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fluttter_with_test/Notifiers/NewsChangeNotifier.dart';
 import 'package:fluttter_with_test/Screens/Newspage.dart';
+import 'package:fluttter_with_test/Services/NewsService.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,6 +19,9 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: Newspage());
+        home: ChangeNotifierProvider(
+          create: (_) => NewsChangeNotifier(NewsService()),
+          child: Newspage(),
+        ));
   }
 }
