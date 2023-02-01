@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:fluttter_with_test/Model/Article.dart';
 import 'package:fluttter_with_test/Services/NewsService.dart';
 
-class NewsChanger extends ChangeNotifier {
-  final NewsService _newsService;
+class NewsChangeNotifier extends ChangeNotifier {
+  final NewsService _newsChangeNotifier;
 
-  NewsChanger(this._newsService);
+  NewsChangeNotifier(this._newsChangeNotifier);
 
   List<Article> _articles = [];
   List<Article> get articles => _articles;
@@ -14,6 +14,10 @@ class NewsChanger extends ChangeNotifier {
   bool get isLoading => _isLoading;
 
   Future<void> getArticles() async {
-    // TODO: Implement
+    _isLoading = true;
+    notifyListeners();
+    _articles = await _newsChangeNotifier.getArticles();
+    _isLoading = false;
+    notifyListeners();
   }
 }
